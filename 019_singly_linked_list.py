@@ -48,6 +48,25 @@ class LinkedList():
         new_node.next = current.next
         current.next = new_node
 
+    def reverse_linked_list_recursive(self, root):
+        curr = root
+        prev = None
+        return self.reverse_linked_list_r(root, prev)
+
+    def reverse_linked_list_r(self, curr, prev):
+        #import pdb; pdb.set_trace()
+        if not curr:
+            self.head = prev
+            return prev
+
+        next = curr.next
+        curr.next = prev
+        prev = curr
+        curr = next
+        self.reverse_linked_list_r(curr, prev)
+
+
+
 def main():
     one = Node(1)
     two = Node(2)
@@ -87,6 +106,11 @@ def main():
     ll.prepend(1)
     ll.insert_after(ll.head, 2)
     ll.traverse()
+
+    print("Reversing the list:")
+    ll.reverse_linked_list_recursive(ll.head)
+    ll.traverse()
+
 
 
 if __name__ == '__main__':
